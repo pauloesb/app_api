@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'zeitwerk'
 gem 'grape'
+gem 'interactor'
+gem 'zeitwerk'

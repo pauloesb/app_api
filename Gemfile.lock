@@ -36,6 +36,7 @@ GEM
       rack-accept
     i18n (1.8.8)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.2)
     minitest (5.14.3)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -54,6 +55,7 @@ PLATFORMS
 
 DEPENDENCIES
   grape
+  interactor
   zeitwerk
 
 BUNDLED WITH
