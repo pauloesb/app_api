@@ -20,7 +20,7 @@ class FetchWeather
   end
 
   def query_data
-    { id: context.location_id }.merge(temperature_units.fetch(context.unit))
+    { id: context.location_id, **temperature_units.fetch(context.unit) }
   end
 
   def is_success?
