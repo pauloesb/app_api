@@ -1,7 +1,7 @@
 class OpenWeatherMapRequester < Requester
 
-  BASE_URI = 'https://api.openweathermap.org/data/2.5'
-  APP_ID = 'da87a647b9134afaf5709f33c1abc0b7'
+  BASE_URI = ENV['BASE_URI']
+  APP_ID = ENV['APP_ID']
 
   def initialize
     super(BASE_URI)
