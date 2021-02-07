@@ -1,1 +1,10 @@
 #!/usr/bin/env ruby
+
+require 'fileutils'
+
+begin
+  FileUtils.cp('.env.example', '.env') unless File.exist?('../.env')
+  system('bundle exec rackup')
+rescue Interrupt
+  nil
+end
