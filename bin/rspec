@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "zeitwerk"
+require "rubygems"
+require "bundler/setup"
+
+loader = Zeitwerk::Loader.new
+loader.push_dir('./app/interactors')
+loader.push_dir('./app/routes')
+loader.push_dir('./app/services')
+loader.setup
+
+Bundler.require
+
+load Gem.bin_path("rspec-core", "rspec")
