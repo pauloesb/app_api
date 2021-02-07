@@ -5,11 +5,19 @@ module Weather
     namespace :weather do
       params do
         requires :unit, type: Symbol, values: [:celsius, :fahrenheit]
-        requires :locations, type: String
+        requires :locations, type: Set[Integer], coerce_with: -> (loc) do
+          raise Grape::Types::InvalidValue.new if loc.match?(/[a-bA-B]/)
+
+          loc.include?(',') ? Set.new(loc.split(',').map(&:to_i)) : Set.new([loc.to_i])
+        end
       end
 
       get :summary do
-        { unit: params[:unit], locations: params[:locations] }
+        fetch_summary = FetchSummary.call(unit: params[:unit], locations: params[:locations].to_a)
+
+        return fetch_summary.results unless fetch_summary.failure?
+
+        error!({ message: fetch_summary.results }, fetch_summary.status)
       end
 
       namespace :locations do
@@ -18,7 +26,11 @@ module Weather
         end
 
         get '/:location_id' do
-          { test: params[:location_id] }
+          fetch_weather = FetchWeather.call(location_id: params[:location_id])
+
+          return fetch_weather.result unless fetch_weather.failure?
+
+          error!({ message: fetch_weather.result }, fetch_weather.status)
         end
       end
     end
