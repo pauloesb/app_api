@@ -11,9 +11,9 @@ class Requester
 
     url.query = URI.encode_www_form(**params)
 
-    res = Net::HTTP.get_response(url)    
+    response = Net::HTTP.get_response(url)
 
-    JSON.parse(res.body, symbolize_names: true) if res.is_a?(Net::HTTPSuccess)
+    { status: response.code.to_i, data: parse_data(response) }
   rescue JSON::ParserError
     res.body
   end
@@ -22,6 +22,10 @@ class Requester
 
   def prepare_url(path)
     URI("#{@uri}#{path}")
+  end
+
+  def parse_data(response)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end
 
