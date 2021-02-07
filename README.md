@@ -15,4 +15,9 @@ Simple API abstraction for Open Weather Map
 - To execute the tests just use: bin/rspec
 - To start the application at 9292 port use: bin/start
 
+## Considerations
+
 - Author: Paulo Eduardo Souza Borba
+- Email: pauloesb@gmail.com
+- Started: 06/02/2021
+- Finished: 07/02/2021
